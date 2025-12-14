@@ -1,0 +1,7 @@
+agent_name = "basic-agent"
+image = "DOCKERHUBUSERNAME/basic-agent:0.1"
+secret_set = "basic-agent-secrets"
+agent_profile = "agent-1x"
+
+[scaling]
+	min_agents = 1
