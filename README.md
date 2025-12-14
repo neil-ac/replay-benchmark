@@ -18,19 +18,21 @@ End-to-end voice evaluation simulator for testing agents in conversation. Deploy
 
 ```bash
 cd simulator
-python run_conversation.py
+uv run run_conversation.py
 ```
 
 See [`simulator/README.md`](simulator/README.md) for detailed setup and deployment instructions.
 
-script:
+Script:
 ```bash
-python final_submission/main.py audio/convo.wav --output results.json
+uv run final_submission/main.py audio/convo.wav --output results.json
 ```
 
-gradio demo:
+Gradio demo:
 ```bash
+uv run s2s_eval_gradio.py
 ```
+Note: will work (way) faster if you have a cuda or mps devices.
 
 ## Diarization
 
