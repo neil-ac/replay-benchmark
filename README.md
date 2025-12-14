@@ -2,6 +2,8 @@
 
 An open source simulator-driven evaluation setup for end-to-end testing of voice-to-voice applications.
 
+![Project Screenshot](./images/s2s-evals.png)
+
 Currently, there are no good setups available to test voice-to-voice apps comprehensively, especially for latency, interruption handling, and other production critical aspects. This project fills that gap by enabling you to test any agent against another agent at scale for production use.
 
 ## Simulator
@@ -29,9 +31,6 @@ python final_submission/main.py audio/convo.wav --output results.json
 gradio demo:
 ```bash
 ```
-
-
-![Project Screenshot](./images/s2s-evals.png)
 
 ## Diarization
 
