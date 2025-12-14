@@ -1,4 +1,4 @@
-# S2S Evals
+# Replay - The first open source framework for e2e benchmark of voice applications
 
 An open source simulator-driven evaluation setup for end-to-end testing of voice-to-voice applications.
 
