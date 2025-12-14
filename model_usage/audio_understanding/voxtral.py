@@ -6,36 +6,107 @@ way more verbose than Flamingo but definitely better!
 
 from transformers import VoxtralForConditionalGeneration, AutoProcessor
 import torch
+from transformers.audio_utils import load_audio
+import soundfile as sf
+import argparse
+import os
 
-device = "cuda" if torch.cuda.is_available() else "cpu"
-repo_id = "mistralai/Voxtral-Mini-3B-2507"
 
-processor = AutoProcessor.from_pretrained(repo_id)
-model = VoxtralForConditionalGeneration.from_pretrained(repo_id, torch_dtype=torch.bfloat16, device_map=device)
+def parse_args():
+    parser = argparse.ArgumentParser(
+        description="Analyze audio using Voxtral model",
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog="""
+Examples:
+  python model_usage/audio_understanding/voxtral.py --audio audio/convo.wav --end 30 --prompt "Is there anything strange in the conversation? Interruptions? Overlapping speakers? Awkward pauses? Repetitions?"
+  python model_usage/audio_understanding/voxtral.py --audio audio/joyfully.wav --prompt "Does the speaker sound happy?"
+  python model_usage/audio_understanding/voxtral.py --audio audio/surprised.wav --prompt "Does the speaker sound surprised or shocked?"
+  python model_usage/audio_understanding/voxtral.py --audio audio/joyfully.wav --prompt "Does the speaker sound surprised or shocked?"
+        """
+    )
+    parser.add_argument(
+        "--audio",
+        type=str,
+        required=True,
+        help="Path to audio file"
+    )
+    parser.add_argument(
+        "--start",
+        type=float,
+        default=0,
+        help="Start time in seconds (default: 0)"
+    )
+    parser.add_argument(
+        "--end",
+        type=float,
+        default=None,
+        help="End time in seconds (default: None)"
+    )
+    parser.add_argument(
+        "--prompt",
+        type=str,
+        default="Is there anything strange in this discussion? Are there multiple speakers? Are they overlapping? What are the emotions? Are there interruptions? Are there awkward pauses? For each question by who?",
+        help="Prompt to send to the model"
+    )
+    return parser.parse_args()
 
-conversation = [
-    {
-        "role": "user",
-        "content": [
-            # {"type": "text", "text": "What's going on in this audio file?"}, 
-            # {"type": "text", "text": "What are they talking about?"}, 
 
-            {"type": "text", "text": "Is there anything strange in this discussion?"}, 
-            {"type": "audio", "path": "/home/eric_bezzam/s2s-evals/model_usage/audio_understanding/1st_topic_discussion.wav"},
-        ],
-    }
-]
+def understand_audio(audio_path, prompt, start_time=None, end_time=None):
+    # load audio
+    sample_rate = 16000
+    audio = load_audio(audio_path, sampling_rate=sample_rate)
+    print(f"Audio duration (seconds): {audio.shape[0] / sample_rate}")
 
-inputs = processor.apply_chat_template(conversation)
-inputs = inputs.to(device, dtype=torch.bfloat16)
+    # extract audio and save to temp file
+    start_sample = int(start_time * sample_rate) if start_time is not None else 0
+    end_sample = int(end_time * sample_rate) if end_time is not None else audio.shape[0]
+    audio = audio[start_sample:end_sample]
+    print(f"Extracted audio duration (seconds): {audio.shape[0] / sample_rate}")
+    temp_audio_path = "temp_audio.wav"
+    sf.write(temp_audio_path, audio, samplerate=sample_rate)
 
-outputs = model.generate(**inputs, max_new_tokens=500)
-decoded_outputs = processor.batch_decode(outputs[:, inputs.input_ids.shape[1]:], skip_special_tokens=True)
+    device = "cuda" if torch.cuda.is_available() else "cpu"
+    repo_id = "mistralai/Voxtral-Mini-3B-2507"
 
-print("\nGenerated response:")
-print("=" * 80)
-print(decoded_outputs[0])
-print("=" * 80)
+    processor = AutoProcessor.from_pretrained(repo_id)
+    model = VoxtralForConditionalGeneration.from_pretrained(repo_id, torch_dtype=torch.bfloat16, device_map=device)
+
+    conversation = [
+        {
+            "role": "user",
+            "content": [
+                {"type": "text", "text": prompt}, 
+                {"type": "audio", "path": temp_audio_path},
+            ],
+        }
+    ]
+
+    inputs = processor.apply_chat_template(conversation)
+    inputs = inputs.to(device, dtype=torch.bfloat16)
+
+    outputs = model.generate(**inputs, max_new_tokens=500)
+    outputs = processor.batch_decode(outputs[:, inputs.input_ids.shape[1]:], skip_special_tokens=True)
+
+    # delete temp audio file
+    os.remove(temp_audio_path)
+
+    return outputs
+
+
+if __name__ == "__main__":
+    args = parse_args()
+    
+    start_time = args.start
+    end_time = args.end
+    audio_path = args.audio
+    prompt = args.prompt
+    decoded_outputs = understand_audio(audio_path, prompt, start_time, end_time)
+
+    print("\nGenerated response:")
+    print("=" * 80)
+    print(decoded_outputs[0])
+    print("=" * 80)
+
 
 
 """
