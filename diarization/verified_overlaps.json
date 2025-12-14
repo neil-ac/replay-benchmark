@@ -1,0 +1,232 @@
+{
+  "threshold": 0.5,
+  "window": 3.0,
+  "summary": {
+    "total_overlaps": 11,
+    "natural_count": 10,
+    "unnatural_count": 1
+  },
+  "overlaps": [
+    {
+      "start": 1.165,
+      "end": 1.825,
+      "duration": 0.6599999999999999,
+      "speakers": [
+        "SPEAKER_00",
+        "SPEAKER_02"
+      ],
+      "interruption": {
+        "interrupter": "SPEAKER_00",
+        "interrupted": [
+          "SPEAKER_02"
+        ]
+      },
+      "audio_window": {
+        "start": 0,
+        "end": 4.825
+      },
+      "voxtral_analysis": "ANALYSIS: In this audio segment, there is a brief overlap where two speakers are talking at the same time. The context is a casual greeting and a question about what's on someone's mind. The tone is friendly and conversational. The overlap is not disruptive or rude, but rather, it could be a natural part of the conversation flow, such as one speaker starting to respond to the question before the other has finished asking it. This is a common occurrence in natural conversations and is often used to show engagement and interest.\n\nRESULT: natural"
+    },
+    {
+      "start": 2.445,
+      "end": 3.145,
+      "duration": 0.7000000000000002,
+      "speakers": [
+        "SPEAKER_00",
+        "SPEAKER_02"
+      ],
+      "interruption": {
+        "interrupter": "SPEAKER_02",
+        "interrupted": [
+          "SPEAKER_00"
+        ]
+      },
+      "audio_window": {
+        "start": 0,
+        "end": 6.145
+      },
+      "voxtral_analysis": "ANALYSIS: In this audio segment, there is a brief overlap where two speakers are talking at the same time. The context is a casual greeting and a question about what's on someone's mind. The tone is friendly and conversational. The overlap is not disruptive or rude, but rather, it could be a natural part of the conversation flow, such as one speaker starting to respond to the question before the other has finished asking it. This is a common occurrence in natural conversations and is often used to show engagement and interest.\n\nRESULT: natural"
+    },
+    {
+      "start": 9.525,
+      "end": 10.305,
+      "duration": 0.7799999999999994,
+      "speakers": [
+        "SPEAKER_00",
+        "SPEAKER_01",
+        "SPEAKER_02"
+      ],
+      "interruption": {
+        "interrupter": "SPEAKER_00",
+        "interrupted": [
+          "SPEAKER_01"
+        ]
+      },
+      "audio_window": {
+        "start": 6.525,
+        "end": 13.305
+      },
+      "voxtral_analysis": "ANALYSIS: In the audio segment, there is a clear overlap where multiple speakers are talking at the same time. The overlap is not abrupt or disruptive, but rather, it seems to be a natural part of the conversation. The speakers are engaged in a discussion about the topic of \"how about\" and its cultural significance. The overlap is not a rude interruption but rather a continuation of the conversation where speakers are building on each other's ideas. The tone is conversational and engaging, with a sense of excitement and enthusiasm. The overlap feels like a natural flow of ideas, with speakers contributing to the discussion without dominating the conversation.\n\nRESULT: natural"
+    },
+    {
+      "start": 13.265,
+      "end": 14.065,
+      "duration": 0.7999999999999989,
+      "speakers": [
+        "SPEAKER_01",
+        "SPEAKER_02"
+      ],
+      "interruption": {
+        "interrupter": "SPEAKER_01",
+        "interrupted": [
+          "SPEAKER_02"
+        ]
+      },
+      "audio_window": {
+        "start": 10.265,
+        "end": 17.065
+      },
+      "voxtral_analysis": "ANALYSIS: In the audio segment, there is a clear overlap where multiple speakers are talking at the same time. The context of the conversation is about discussing the origins and cultural significance of a particular topic. The speakers seem to be engaged in a lively discussion, with one speaker saying \"Let's talk about how we've evolved and its cultural significance\" and another speaker responding with \"It takes a second to get going.\" The overlap is not abrupt or disruptive, but rather, it seems like a natural part of the conversation flow. The speakers are not interrupting each other in a rude manner, but rather, they are engaging in a back-and-forth exchange that is common in natural conversations.\n\nRESULT: natural"
+    },
+    {
+      "start": 20.785,
+      "end": 21.445,
+      "duration": 0.6600000000000001,
+      "speakers": [
+        "SPEAKER_01",
+        "SPEAKER_02"
+      ],
+      "interruption": {
+        "interrupter": "SPEAKER_02",
+        "interrupted": [
+          "SPEAKER_01"
+        ]
+      },
+      "audio_window": {
+        "start": 17.785,
+        "end": 24.445
+      },
+      "voxtral_analysis": "ANALYSIS: In this audio segment, there is a brief overlap between two speakers, where one person says \"Munich\" and the other responds with \"Good choice.\" The overlap is short and occurs in a context where the speakers are discussing a topic, likely related to travel or destinations. The tone is positive and enthusiastic, with the second speaker expressing agreement and excitement. The overlap feels natural and is likely a part of the conversational flow, as it is common in casual conversations to interject with agreement or enthusiasm.\n\nRESULT: natural"
+    },
+    {
+      "start": 21.985,
+      "end": 23.365,
+      "duration": 1.379999999999999,
+      "speakers": [
+        "SPEAKER_01",
+        "SPEAKER_02"
+      ],
+      "interruption": {
+        "interrupter": "SPEAKER_02",
+        "interrupted": [
+          "SPEAKER_01"
+        ]
+      },
+      "audio_window": {
+        "start": 18.985,
+        "end": 26.365
+      },
+      "voxtral_analysis": "ANALYSIS: In this audio segment, there is a brief overlap where two speakers are talking at the same time. The overlap is not particularly long, and it occurs in a context where the speakers are discussing the city of Munich and its balance between tradition and modernity. The tone is positive and enthusiastic, with the speakers expressing appreciation for Munich's ability to blend traditional elements with contemporary developments. The overlap is not disruptive or rude, and it does not seem to be an interruption. Instead, it could be seen as a natural part of the conversation flow, where speakers are engaged in a lively discussion and may occasionally overlap to express their thoughts or agree with each other.\n\nRESULT: natural"
+    },
+    {
+      "start": 24.685,
+      "end": 27.025,
+      "duration": 2.34,
+      "speakers": [
+        "SPEAKER_01",
+        "SPEAKER_02"
+      ],
+      "interruption": {
+        "interrupter": "SPEAKER_01",
+        "interrupted": [
+          "SPEAKER_02"
+        ]
+      },
+      "audio_window": {
+        "start": 21.685,
+        "end": 30.025
+      },
+      "voxtral_analysis": "**ANALYSIS:** In this audio segment, there is a brief overlap where two speakers are talking at the same time. The context is a discussion about a beer tradition, and the speakers are expressing their opinions. The overlap is not disruptive or rude, but rather a natural part of the conversation flow. The speakers are engaged in a friendly exchange, and the overlap is likely due to the enthusiasm and excitement they have about the topic. The use of phrases like \"kind of funny\" and \"holding on to tradition\" suggests a lighthearted and collaborative tone. The overlap is not a problem, but rather a natural part of the conversation.\n\n**RESULT:** natural"
+    },
+    {
+      "start": 82.805,
+      "end": 83.465,
+      "duration": 0.6599999999999966,
+      "speakers": [
+        "SPEAKER_01",
+        "SPEAKER_02"
+      ],
+      "interruption": {
+        "interrupter": "SPEAKER_01",
+        "interrupted": [
+          "SPEAKER_02"
+        ]
+      },
+      "audio_window": {
+        "start": 79.805,
+        "end": 86.465
+      },
+      "voxtral_analysis": "ANALYSIS: In this audio segment, there is a brief overlap where multiple speakers are talking at the same time. The context is a casual conversation, and the speakers are engaged in a discussion about something. The overlap is not particularly long, and it's not clear if it's intentional or unintentional. However, the tone of the conversation is light and friendly, with the speakers using phrases like \"don't sweat it\" and \"so,\" which are common in natural conversation. The overlap does not seem to be disruptive or rude, and it's possible that it's a natural part of the conversation flow, such as one speaker trying to interject or add a point while the other is still speaking.\n\nRESULT: natural"
+    },
+    {
+      "start": 121.865,
+      "end": 122.445,
+      "duration": 0.5799999999999983,
+      "speakers": [
+        "SPEAKER_01",
+        "SPEAKER_02"
+      ],
+      "interruption": {
+        "interrupter": "SPEAKER_01",
+        "interrupted": [
+          "SPEAKER_02"
+        ]
+      },
+      "audio_window": {
+        "start": 118.865,
+        "end": 125.445
+      },
+      "voxtral_analysis": "**ANALYSIS:** In this audio segment, there is a brief overlap between two speakers. The first speaker says \"interesting\" and then \"days with patients,\" while the second speaker responds with \"okay, wow.\" The overlap is quite short and occurs during a natural transition in the conversation. The first speaker's response is a form of backchanneling, which is a common and natural way to show engagement and interest in the conversation. The second speaker's response is also a natural acknowledgment of the first speaker's comment. The tone is friendly and conversational, with no signs of rudeness or disruption. The overlap feels like a smooth flow of conversation rather than an unnatural or problematic interruption.\n\n**RESULT:** natural"
+    },
+    {
+      "start": 160.585,
+      "end": 161.105,
+      "duration": 0.5199999999999818,
+      "speakers": [
+        "SPEAKER_01",
+        "SPEAKER_02"
+      ],
+      "interruption": {
+        "interrupter": "SPEAKER_01",
+        "interrupted": [
+          "SPEAKER_02"
+        ]
+      },
+      "audio_window": {
+        "start": 157.585,
+        "end": 164.105
+      },
+      "voxtral_analysis": "**ANALYSIS:** In the audio segment, multiple speakers are talking at the same time, which is a common occurrence in natural conversations. However, the overlap in this case is not entirely natural. While it could be seen as a form of backchanneling or excitement, it also feels somewhat forced or abrupt. The speakers seem to be trying to assert their points, which could be interpreted as a lack of respect for the other speaker's turn to talk. The context is a discussion about a historical piece, which suggests a serious tone, but the overlap feels more like a disruption than a natural flow of conversation. The speakers' intentions might be to engage in a lively debate, but the abruptness of the overlap could be seen as unprofessional or rude.\n\n**RESULT:** unnatural"
+    },
+    {
+      "start": 250.285,
+      "end": 250.785,
+      "duration": 0.5,
+      "speakers": [
+        "SPEAKER_01",
+        "SPEAKER_02"
+      ],
+      "interruption": {
+        "interrupter": "SPEAKER_01",
+        "interrupted": [
+          "SPEAKER_02"
+        ]
+      },
+      "audio_window": {
+        "start": 247.285,
+        "end": 253.785
+      },
+      "voxtral_analysis": "**ANALYSIS:** In this audio segment, there is a clear overlap between two speakers. The first speaker says \"notices a certain protectiveness then\" and the second speaker responds with \"totally.\" The overlap is brief and occurs during a natural pause in the first speaker's sentence. The second speaker's response is a simple agreement, which is a common form of backchanneling in conversation. The tone is neutral and the context suggests a friendly exchange rather than a confrontational or disruptive situation. The overlap feels natural and is likely a part of the conversational flow.\n\n**RESULT: natural**"
+    }
+  ]
+}

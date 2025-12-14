@@ -15,7 +15,6 @@ def main():
     parser.add_argument(
         "url",
         nargs="?",
-        default="https://files.pyannote.ai/marklex1min.wav",
         help="Public URL of the audio file (default: sample file)",
     )
     args = parser.parse_args()
