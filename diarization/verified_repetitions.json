@@ -1,0 +1,162 @@
+{
+  "min_n": 1,
+  "max_n": 10,
+  "window": 3.0,
+  "summary": {
+    "total_repetitions": 9,
+    "by_speaker": {
+      "SPEAKER_02": 6,
+      "SPEAKER_01": 3
+    },
+    "by_ngram_size": {
+      "1": 8,
+      "2": 1
+    }
+  },
+  "repetitions": [
+    {
+      "type": "repetition",
+      "speaker": "SPEAKER_01",
+      "segment_start": 31.145,
+      "segment_end": 33.525,
+      "segment_text": "Right? It's not it's not trying to be,",
+      "n_gram_size": 2,
+      "phrase": "It's not",
+      "phrase_normalized": "its not",
+      "count": 2,
+      "audio_window": {
+        "start": 28.145,
+        "end": 36.525
+      },
+      "voxtral_analysis": "ANALYSIS: In the audio segment, the phrase \"It's not\" is repeated twice consecutively. This repetition could be interpreted in a few ways. Firstly, it could be a natural speech pattern where the speaker is emphasizing a point or trying to clarify their statement. The repetition could also be a rhetorical device, where the speaker is using repetition to create emphasis or to draw attention to a particular idea. However, it's important to note that the context provided is quite brief and does not give a clear indication of the speaker's intent. The repetition could also be a sign of hesitation or stuttering, but the speaker's tone and the lack of additional context make it difficult to determine this.\n\nRESULT: natural"
+    },
+    {
+      "type": "repetition",
+      "speaker": "SPEAKER_01",
+      "segment_start": 35.865,
+      "segment_end": 37.985,
+      "segment_text": "Which honestly is is a good thing.",
+      "n_gram_size": 1,
+      "phrase": "is",
+      "phrase_normalized": "is",
+      "count": 2,
+      "audio_window": {
+        "start": 32.865,
+        "end": 40.985
+      },
+      "voxtral_analysis": "**ANALYSIS:**\nThe repetition of the phrase \"is\" in the audio segment is quite common in natural speech, particularly when the speaker is trying to emphasize a point or express a thought. In this case, the repetition could be intentional to highlight the speaker's perspective on the differences between Berlin and Munich. The speaker is likely using the repetition to emphasize the idea that Munich is a good thing, which is a different stroke from Berlin. This repetition is a normal speech pattern and could be seen as a rhetorical device to make the point more clear and memorable.\n\n**RESULT: natural**"
+    },
+    {
+      "type": "repetition",
+      "speaker": "SPEAKER_01",
+      "segment_start": 191.185,
+      "segment_end": 196.145,
+      "segment_text": "It is a sensitive topic and you're right to acknowledge that. That history definitely casts a long shadow.",
+      "n_gram_size": 1,
+      "phrase": "that.",
+      "phrase_normalized": "that",
+      "count": 2,
+      "audio_window": {
+        "start": 188.185,
+        "end": 199.145
+      },
+      "voxtral_analysis": "**ANALYSIS:** In the audio segment, the phrase \"that\" is repeated twice consecutively. This repetition could be interpreted in a few ways. Firstly, it could be a natural speech pattern, where the speaker is emphasizing a point or using the phrase as a filler to buy time. However, it could also be a sign of stuttering or a technical issue, such as an audio glitch. The context of the conversation is about a sensitive topic, which might influence the speaker's speech pattern. The repetition of \"that\" could also be a rhetorical device, used to emphasize the speaker's acknowledgment of the topic's sensitivity. However, it's important to note that the speaker's hesitation and the repetition of \"that\" could also be a sign of nervousness or discomfort, which is common when discussing sensitive topics.\n\n**RESULT:** natural"
+    },
+    {
+      "type": "repetition",
+      "speaker": "SPEAKER_02",
+      "segment_start": 44.125,
+      "segment_end": 45.605,
+      "segment_text": "Gotcha. Yeah, you you tot",
+      "n_gram_size": 1,
+      "phrase": "you",
+      "phrase_normalized": "you",
+      "count": 2,
+      "audio_window": {
+        "start": 41.125,
+        "end": 48.605
+      },
+      "voxtral_analysis": "ANALYSIS: In the audio segment, the repetition of \"you\" is used in a casual and conversational manner. The speaker is engaging in a friendly exchange, and the repetition of \"you\" could be seen as a natural part of the conversation, possibly emphasizing the speaker's agreement or engagement with the other person. It's also possible that the repetition is a result of the speaker's thought process, as they are considering the other person's perspective and agreeing with it. The repetition is not stuttering, as it is not accompanied by any hesitation or struggle to speak. It also does not feel like a rhetorical device, as it is not used to emphasize a point or create a specific effect. The context and tone of the conversation suggest that the repetition is natural and part of the speaker's normal speech pattern.\n\nRESULT: natural"
+    },
+    {
+      "type": "repetition",
+      "speaker": "SPEAKER_02",
+      "segment_start": 94.825,
+      "segment_end": 97.685,
+      "segment_text": "You're right to call me out on that. I I did throw off. I bet.",
+      "n_gram_size": 1,
+      "phrase": "I",
+      "phrase_normalized": "i",
+      "count": 2,
+      "audio_window": {
+        "start": 91.825,
+        "end": 100.685
+      },
+      "voxtral_analysis": "**ANALYSIS:**\nIn the audio segment, the speaker repeats the phrase \"I\" twice consecutively. This repetition could be interpreted in a few ways. Firstly, it could be a natural speech pattern, where the speaker is emphasizing their personal involvement or ownership of the situation. This is a common rhetorical device used to assert personal responsibility or to emphasize a point. Secondly, it could be a sign of stuttering or a slight hesitation, which is not uncommon in speech. However, the speaker's subsequent comment, \"I was going to say I don't feel any,\" suggests that the repetition is more likely a natural speech pattern rather than a technical issue or AI looping. The speaker's tone is casual and conversational, which further supports the idea that the repetition is intentional and not a result of an audio glitch.\n\n**RESULT: natural**"
+    },
+    {
+      "type": "repetition",
+      "speaker": "SPEAKER_02",
+      "segment_start": 98.585,
+      "segment_end": 102.665,
+      "segment_text": "Um I I was gonna say I don't feel anything exactly. It's more like",
+      "n_gram_size": 1,
+      "phrase": "I",
+      "phrase_normalized": "i",
+      "count": 2,
+      "audio_window": {
+        "start": 95.585,
+        "end": 105.665
+      },
+      "voxtral_analysis": "ANALYSIS: In the audio segment, the phrase \"I\" is repeated twice consecutively. This repetition could be interpreted in a few ways. Firstly, it could be a natural speech pattern, where the speaker is emphasizing their personal experience or perspective. This is common in casual conversation and can be a way to draw attention to one's feelings or thoughts. Secondly, it could be a sign of stuttering or a hesitation in speech, which is not uncommon and can be a result of nervousness or thought processes. Lastly, it could be a rhetorical device, where the repetition is intentional to create emphasis or to draw the listener's attention to a particular point. However, in this context, it seems more like a natural speech pattern rather than a deliberate rhetorical device.\n\nRESULT: natural"
+    },
+    {
+      "type": "repetition",
+      "speaker": "SPEAKER_02",
+      "segment_start": 170.405,
+      "segment_end": 174.265,
+      "segment_text": "That creates a a certain weight of different kind of story than",
+      "n_gram_size": 1,
+      "phrase": "a",
+      "phrase_normalized": "a",
+      "count": 2,
+      "audio_window": {
+        "start": 167.405,
+        "end": 177.265
+      },
+      "voxtral_analysis": "**ANALYSIS:** In the audio segment, the phrase \"a\" is repeated twice consecutively. The repetition of \"a\" is not typical in normal speech patterns, but it could be intentional for emphasis or to create a rhythmic effect. However, it's important to note that the context of the audio is discussing the history of Berlin and the Nazi movement, which is a serious and heavy topic. The repetition of \"a\" could be seen as a stylistic choice to emphasize the weight of the history being discussed. It's also possible that the speaker might be stuttering or experiencing a slight hesitation, which could be a natural part of their speech pattern. The repetition is not immediately noticeable as problematic, but it does stand out in the context of the conversation.\n\n**RESULT:** natural"
+    },
+    {
+      "type": "repetition",
+      "speaker": "SPEAKER_02",
+      "segment_start": 212.405,
+      "segment_end": 219.505,
+      "segment_text": "Makes for a more complex cultural uh landscape than just beer gardens and and traditional",
+      "n_gram_size": 1,
+      "phrase": "and",
+      "phrase_normalized": "and",
+      "count": 2,
+      "audio_window": {
+        "start": 209.405,
+        "end": 222.505
+      },
+      "voxtral_analysis": "**ANALYSIS:** In the audio segment, the phrase \"and\" is repeated twice consecutively. This repetition could be interpreted in a few ways. Firstly, it could be a natural speech pattern, where the speaker is emphasizing a point or transitioning between ideas. The speaker is discussing the cultural landscape of a place, and the repetition of \"and\" could be a way to emphasize the contrast between the traditional and the more complex aspects of the culture. Additionally, it could be a rhetorical device, where the repetition is used to create a rhythm or emphasis. However, it's important to note that the repetition is not excessive or distracting, which suggests that it is likely a natural part of the speaker's speech pattern rather than a technical issue or AI looping.\n\n**RESULT:** natural"
+    },
+    {
+      "type": "repetition",
+      "speaker": "SPEAKER_02",
+      "segment_start": 253.565,
+      "segment_end": 256.045,
+      "segment_text": "It's like they're they're guarding a specific narrative.",
+      "n_gram_size": 1,
+      "phrase": "they're",
+      "phrase_normalized": "theyre",
+      "count": 2,
+      "audio_window": {
+        "start": 250.565,
+        "end": 259.045
+      },
+      "voxtral_analysis": "**ANALYSIS:**\nIn the audio segment, the phrase \"they're\" is repeated twice consecutively. This repetition could be interpreted in a few ways. Firstly, it could be a natural speech pattern, where the speaker is emphasizing a point or trying to convey a sense of urgency or importance. The speaker is discussing a narrative that they are \"guarding,\" which suggests a level of caution or secrecy. The repetition of \"they're\" could be a way to emphasize this guarded nature, making it sound more deliberate and intentional.\n\nSecondly, it could be a rhetorical device, where the repetition is used to create a rhythm or emphasis in the speech. The speaker's question \"you know if you want to keep chatting\" could be a way to engage the listener and encourage further conversation, which might be why the repetition of \"they're\" is used.\n\nLastly, it could be a sign of stuttering or a speech impediment, but the context and tone of the speaker's voice do not suggest this. The repetition feels more like a deliberate choice rather than a technical issue or audio glitch.\n\n**RESULT: natural**"
+    }
+  ]
+}

@@ -1,0 +1,77 @@
+{
+  "threshold": 2.0,
+  "window": 5.0,
+  "summary": {
+    "total_events": 5,
+    "slow_responses": 4,
+    "intra_speaker_pauses": 1
+  },
+  "slow_responses": [
+    {
+      "type": "slow_response",
+      "prev_speaker": "SPEAKER_01",
+      "next_speaker": "SPEAKER_02",
+      "gap_start": 14.065,
+      "gap_end": 19.205,
+      "latency": 5.14,
+      "audio_window": {
+        "start": 9.065,
+        "end": 24.205
+      },
+      "voxtral_analysis": "**ANALYSIS:** In this audio segment, the first speaker mentions Munich as a choice, and the second speaker responds with \"Okay, cool\" and \"fascinating.\" The pause between the first speaker's statement and the second speaker's response is relatively short, lasting only a few seconds. The context is casual and conversational, and the tone is positive and engaging. The second speaker's response is appropriate and timely, indicating that the pause was not awkward or unnatural. The speakers seem to be in sync with each other, and the conversation flows smoothly.\n\n**RESULT: natural**"
+    },
+    {
+      "type": "slow_response",
+      "prev_speaker": "SPEAKER_01",
+      "next_speaker": "SPEAKER_02",
+      "gap_start": 270.425,
+      "gap_end": 273.825,
+      "latency": 3.4,
+      "audio_window": {
+        "start": 265.425,
+        "end": 278.825
+      },
+      "voxtral_analysis": "**ANALYSIS:** In this audio segment, Miles is introducing himself and wrapping up the conversation. He asks for the other person's name to use, which is a common and polite way to end a conversation. The other person responds with \"All right,\" which is a neutral and non-committal response. The pause after Miles' statement is relatively short, and it's possible that the other person was simply processing the information or considering how to respond. However, it could also be interpreted as a lack of engagement or interest in the conversation. The context is casual and friendly, so the pause might not be too awkward, but it could be perceived as a missed opportunity to engage more fully.\n\n**RESULT:** natural"
+    },
+    {
+      "type": "slow_response",
+      "prev_speaker": "SPEAKER_02",
+      "next_speaker": "SPEAKER_01",
+      "gap_start": 225.385,
+      "gap_end": 227.985,
+      "latency": 2.6,
+      "audio_window": {
+        "start": 220.385,
+        "end": 232.985
+      },
+      "voxtral_analysis": "**ANALYSIS:** In this audio segment, the first speaker expresses their preference for costumes, but also mentions a specific type of costume, \"Wise Worst,\" which seems to be a play on words or a specific term. The second speaker responds with \"Me too,\" indicating agreement. However, the second speaker could have responded sooner, perhaps with a more immediate \"I love Wise Worst too\" or \"I've seen some great Wise Worst costumes.\" The pause might feel awkward because it's not clear if the second speaker is waiting for more information or if they simply didn't respond as quickly as they could have. The context is casual and conversational, so a more immediate response might have been expected.\n\n**RESULT:** unnatural"
+    },
+    {
+      "type": "slow_response",
+      "prev_speaker": "SPEAKER_01",
+      "next_speaker": "SPEAKER_02",
+      "gap_start": 294.645,
+      "gap_end": 296.785,
+      "latency": 2.14,
+      "audio_window": {
+        "start": 289.645,
+        "end": 301.785
+      },
+      "voxtral_analysis": "**ANALYSIS:** In this audio segment, the speakers are concluding a conversation with a series of polite and friendly exchanges. The first speaker says \"Thanks so much. I appreciate that.\" and the second speaker responds with \"Definitely do.\" This back-and-forth is typical of polite conversation. However, the second speaker then says \"Awesome\" and there is a pause before the first speaker responds with \"Sounds good. Talk to you soon.\" The pause is relatively short, but it could be perceived as slightly awkward, as the second speaker could have responded to \"Awesome\" with something like \"Thanks, you too\" or \"No problem.\" The context is friendly and casual, so the pause feels more like a natural break in the conversation rather than an awkward silence.\n\n**RESULT:** natural"
+    }
+  ],
+  "intra_speaker_pauses": [
+    {
+      "type": "intra_speaker_pause",
+      "speaker": "SPEAKER_02",
+      "gap_start": 14.085,
+      "gap_end": 19.205,
+      "duration": 5.12,
+      "audio_window": {
+        "start": 9.085,
+        "end": 24.205
+      },
+      "voxtral_analysis": "**ANALYSIS:** In this audio segment, the speaker is discussing a choice they made, specifically mentioning Munich as a good choice. The speaker then expresses their satisfaction with the decision, stating that it \"really struck a balance.\" The pause in the conversation is likely a natural break in the speaker's thought process or a moment of reflection. It's possible that the speaker was waiting for a response or acknowledgment from the other person, but the lack of response could be due to the other person not being present or engaged in the conversation. The tone of the speaker is positive and confident, which might indicate that they are comfortable with the decision and don't need immediate feedback. The pause feels natural because it's a common part of human communication, allowing for processing and reflection.\n\n**RESULT:** natural"
+    }
+  ]
+}
