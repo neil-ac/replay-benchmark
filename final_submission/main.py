@@ -7,7 +7,7 @@ Usage:
     python main.py <audio_path> [--output <output_path>]
 
 Example:
-    python main.py audio/convo.wav --output results.json
+    python final_submission/main.py audio/convo.wav --output results.json
 """
 
 import argparse

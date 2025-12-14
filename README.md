@@ -2,6 +2,16 @@
 
 Evaluating speech-to-speech (S2S) models.
 
+script:
+```bash
+python final_submission/main.py audio/convo.wav --output results.json
+```
+
+gradio demo:
+```bash
+```
+
+
 ## Diarization
 
 Scripts for speaker diarization using pyannote.ai.
