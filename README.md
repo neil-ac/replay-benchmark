@@ -31,6 +31,8 @@ gradio demo:
 ```
 
 
+![Project Screenshot](./images/s2s-evals.png)
+
 ## Diarization
 
 Scripts for speaker diarization using pyannote.ai.
