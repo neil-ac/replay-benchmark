@@ -5,7 +5,7 @@ conda create -n voiceai python=3.10
 conda activate voiceai
 
 pip install "pipecat-ai[all]" websockets
-pip install "transformers[torch]==v5.0.0rc0"
+pip install "transformers[torch]==v4.56.1"
 ```
 
 Getting Gradium key: https://eu.api.gradium.ai/studio/
