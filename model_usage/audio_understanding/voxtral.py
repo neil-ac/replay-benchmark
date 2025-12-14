@@ -22,6 +22,11 @@ Examples:
   python model_usage/audio_understanding/voxtral.py --audio audio/joyfully.wav --prompt "Does the speaker sound happy?"
   python model_usage/audio_understanding/voxtral.py --audio audio/surprised.wav --prompt "Does the speaker sound surprised or shocked?"
   python model_usage/audio_understanding/voxtral.py --audio audio/joyfully.wav --prompt "Does the speaker sound surprised or shocked?"
+  
+  python model_usage/audio_understanding/voxtral.py --audio audio/vibevoice_basketball.wav --end 60 --prompt "There are two speakers in this file. Are the speakers having a normal conversation? Namely taking turns, responding to each other like in a normal conversation, and no awkward pauses?"
+  python model_usage/audio_understanding/voxtral.py --audio audio/sesame.wav --end 60 --prompt "There are two speakers in this file. Are the speakers having a normal conversation? Namely taking turns, responding to each other like in a normal conversation, and no awkward pauses?"
+  python model_usage/audio_understanding/voxtral.py --audio audio/sesame.wav --end 60 --prompt "are the female and male speakers speaking at the same time?"
+
         """
     )
     parser.add_argument(
