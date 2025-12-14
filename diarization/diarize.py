@@ -2,10 +2,10 @@ import argparse
 import json
 import time
 from pathlib import Path
-
+import os
 import requests
 
-PYANNOTE_API_KEY = "sk_6faa8aab870f4a37ab158ad1b735c053"
+PYANNOTE_API_KEY = os.getenv("PYANNOTE_API_KEY")
 
 
 def main():

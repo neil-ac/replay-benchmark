@@ -3,10 +3,13 @@
 import json
 import time
 from pathlib import Path
-
+import os
 import requests
+from dotenv import load_dotenv
 
-PYANNOTE_API_KEY = "sk_6faa8aab870f4a37ab158ad1b735c053"
+load_dotenv()
+
+PYANNOTE_API_KEY = os.getenv("PYANNOTE_API_KEY")
 
 
 def run_diarization(audio_url: str) -> dict:
