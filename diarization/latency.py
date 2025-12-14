@@ -138,6 +138,57 @@ def filter_clean_transitions(
     return clean
 
 
+def find_intra_speaker_pauses(
+    annotation: Annotation,
+    threshold: float = 4.0,
+) -> list[dict]:
+    """Find pauses within a single speaker's timeline when no one else is talking.
+
+    Detects gaps between consecutive segments of the same speaker that
+    exceed the threshold AND where no other speaker is active during the gap.
+    These may indicate model failures or hesitations.
+
+    Args:
+        annotation: The full annotation
+        threshold: Minimum pause duration to flag (default 1.0s)
+
+    Returns:
+        List of pause events with speaker, start, end, duration
+    """
+    pauses = []
+    speaker_timelines = build_speaker_timelines(annotation)
+
+    for speaker, timeline in speaker_timelines.items():
+        # Get gaps in this speaker's timeline
+        gaps = timeline.gaps()
+
+        for gap in gaps:
+            if gap.duration >= threshold:
+                # Check if any other speaker is active during this gap
+                gap_segment = Segment(gap.start, gap.end)
+                active_during_gap = annotation.crop(gap_segment, mode="intersection")
+                active_speakers = set(active_during_gap.labels())
+
+                # Remove the current speaker (they're not active, it's their gap)
+                other_speakers = active_speakers - {speaker}
+
+                # Only flag if no other speaker is talking during this gap
+                if not other_speakers:
+                    pauses.append(
+                        {
+                            "speaker": speaker,
+                            "start": round(gap.start, 3),
+                            "end": round(gap.end, 3),
+                            "duration": round(gap.duration, 3),
+                            "type": "intra_speaker_pause",
+                        }
+                    )
+
+    # Sort by start time
+    pauses.sort(key=lambda x: x["start"])
+    return pauses
+
+
 def flag_slow_responses(
     transitions: list[dict],
     threshold: float = 2.0,
@@ -263,7 +314,6 @@ def main():
     parser.add_argument(
         "--threshold",
         type=float,
-        default=2.0,
         help="Threshold (seconds) for flagging slow responses and pauses (default: 1.0)",
     )
     args = parser.parse_args()
@@ -321,12 +371,18 @@ def main():
                 f"  {pair}: avg={p_stats['avg_latency']:.3f}s ({p_stats['response_count']} transitions)"
             )
 
+    # Flag slow responses and intra-speaker pauses
     slow_responses = flag_slow_responses(clean_transitions, threshold=args.threshold)
+    intra_pauses = find_intra_speaker_pauses(annotation, threshold=args.threshold)
+
+    # Print flagged issues
+    if slow_responses or intra_pauses:
+        print("\n" + "=" * 50)
+        print(f"FLAGGED ISSUES (threshold: {args.threshold:.1f}s)")
+        print("=" * 50)
 
     if slow_responses:
-        print(
-            f"\n⚠️  SLOW RESPONSES (threshold: {args.threshold:.1f}s) - {len(slow_responses)} events:"
-        )
+        print(f"\n⚠️  SLOW RESPONSES ({len(slow_responses)} events)")
         print("-" * 50)
         for event in slow_responses:
             print(
@@ -335,6 +391,22 @@ def main():
                 f"{event['latency']:.3f}s delay"
             )
 
+    if intra_pauses:
+        print(f"\n⚠️  INTRA-SPEAKER PAUSES ({len(intra_pauses)} events)")
+        print("-" * 50)
+        # Group by speaker for cleaner output
+        by_speaker: dict[str, list[dict]] = defaultdict(list)
+        for pause in intra_pauses:
+            by_speaker[pause["speaker"]].append(pause)
+
+        for speaker, pauses in sorted(by_speaker.items()):
+            print(f"\n  {speaker}: {len(pauses)} pause(s)")
+            for pause in pauses:
+                print(
+                    f"    [{pause['start']:.2f}s - {pause['end']:.2f}s] "
+                    f"{pause['duration']:.3f}s gap"
+                )
+
     # Output results
     result = {
         "statistics": stats,
@@ -342,6 +414,7 @@ def main():
         "flags": {
             "threshold": args.threshold,
             "slow_responses": slow_responses,
+            "intra_speaker_pauses": intra_pauses,
         },
     }
 
