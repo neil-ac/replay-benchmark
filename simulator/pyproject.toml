@@ -1,0 +1,18 @@
+[project]
+name = "e2e-voice-evals"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi>=0.124.4",
+    "opentelemetry-exporter-otlp-proto-http>=1.39.1",
+    "pipecat-ai[cartesia,daily,deepgram,gradium,openai,silero,tracing,webrtc]>=0.0.97",
+    "pipecat-ai-small-webrtc-prebuilt>=2.0.0",
+    "pipecatcloud>=0.2.15",
+    "pyaudio>=0.2.14",
+    "python-dotenv>=1.2.1",
+    "transformers>=4.0.0",
+    "uvicorn>=0.38.0",
+    "pipecat>=0.3.0",
+]
