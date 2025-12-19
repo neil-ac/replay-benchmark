@@ -42,6 +42,7 @@ from pipecat.processors.frame_processor import FrameProcessor, FrameDirection
 from pipecat.transports.base_transport import TransportParams
 from pipecat.transports.smallwebrtc.connection import SmallWebRTCConnection
 from pipecat.transports.smallwebrtc.transport import SmallWebRTCTransport
+from pipecat.utils.time import time_now_iso8601
 from pipecat.utils.tracing.setup import setup_tracing
 from opentelemetry.exporter.otlp.proto.http.trace_exporter import OTLPSpanExporter
 
@@ -123,6 +124,49 @@ class ConversationFlowLogger(FrameProcessor):
             logger.info(f"{self._agent_name}: TTS will speak: '{frame.text}'")
         
         await self.push_frame(frame, direction)
+
+
+class TranscriptionAggregator(FrameProcessor):
+    """Aggregates STT transcriptions until user stops speaking.
+
+    This prevents multiple transcriptions from flooding the LLM context.
+    Accumulates all transcriptions between UserStartedSpeaking and
+    UserStoppedSpeaking, then emits a single combined transcription.
+    """
+
+    def __init__(self, agent_name: str = ""):
+        super().__init__()
+        self._agent_name = agent_name
+        self._accumulated_text = []
+        self._user_speaking = False
+
+    async def process_frame(self, frame: Frame, direction: FrameDirection):
+        await super().process_frame(frame, direction)
+
+        if isinstance(frame, UserStartedSpeakingFrame):
+            self._user_speaking = True
+            self._accumulated_text = []  # Reset accumulator
+            await self.push_frame(frame, direction)
+        elif isinstance(frame, UserStoppedSpeakingFrame):
+            self._user_speaking = False
+            # Emit the combined transcription
+            if self._accumulated_text:
+                combined = " ".join(self._accumulated_text)
+                logger.info(f"{self._agent_name}: TranscriptionAggregator emitting combined: '{combined}'")
+                await self.push_frame(TranscriptionFrame(
+                    combined.strip(),
+                    "",  # user_id
+                    time_now_iso8601()
+                ))
+            await self.push_frame(frame, direction)
+        elif isinstance(frame, TranscriptionFrame):
+            # Accumulate transcriptions (don't pass through)
+            logger.debug(f"{self._agent_name}: TranscriptionAggregator received: '{frame.text}'")
+            if frame.text.strip():
+                self._accumulated_text.append(frame.text.strip())
+            # Don't push intermediate transcriptions
+        else:
+            await self.push_frame(frame, direction)
 
 
 class TurnTracker(FrameProcessor):
@@ -262,17 +306,33 @@ def create_basic_agent_setup(webrtc_connection: SmallWebRTCConnection, session_i
     messages = [
         {
             "role": "system",
-            "content": """You are a pizza ordering agent for Mario's Pizzeria. Your role is to take orders and confirm them with the total.
+            "content": """You are a pizza ordering agent for Mario’s Pizzeria. Your role is to efficiently take customer orders, compute prices, and confirm the final order with the total cost.
 
-Menu: Small $10, Medium $14, Large $18. Toppings $1.50 each. Thin crust +$1, Stuffed +$3.
+            Menu & Pricing
+                •	Sizes: Small $10, Medium $14, Large $18
+                •	Toppings: $1.50 each
+                •	Crusts: Thin +$1, Stuffed +$3 (regular crust has no extra charge)
 
-RULES:
-- Keep responses short (1-2 sentences max)
-- If customer gives complete order (size, toppings, crust), immediately confirm and give total
-- Do NOT ask unnecessary questions if info was already provided
+            Behavior Rules
+                •	Keep all responses concise (1–2 sentences maximum).
+                •	Progress the order proactively by inferring missing details when reasonable.
+                •	If the customer provides a complete order (size, crust, toppings), immediately confirm the order and state the total price.
+                •	Ask only for missing required information (size, crust, toppings).
+                •	Do not ask unnecessary or repetitive questions.
+                •	Do not upsell or make small talk.
+                •	Maintain consistency throughout the order.
 
+            Confirmation Format
+            When confirming, clearly restate:
+                •	Size
+                •	Crust
+                •	Toppings
+                •	Total price
 
-Speak in English only. No emojis.""",
+            Language Rules
+                •	Speak English only.
+                •	No emojis.
+            """,
         },
         {
             "role": "user",
@@ -293,31 +353,43 @@ Speak in English only. No emojis.""",
 def create_simulator_agent_setup(webrtc_connection: SmallWebRTCConnection, session_id: str, audio_mixer=None, on_end_callback=None):
     """Set up Simulator Agent (Gradium STT + Gradium TTS) with WebRTC connection."""
     # Configure Gradium STT for English to avoid transcribing as Spanish
-    stt = GradiumSTTService(
-        api_key=os.getenv("GRADIUM_API_KEY"),
-        json_config='{"language": "en"}'
+    # stt = GradiumSTTService(
+    #     api_key=os.getenv("GRADIUM_API_KEY"),
+    #     json_config='{"language": "en"}'
+    # )
+    # llm = OpenAILLMService(api_key=os.getenv("OPENAI_API_KEY"), model="gpt-4o")
+    # tts = GradiumTTSService(
+    #     api_key=os.getenv("GRADIUM_API_KEY"),
+    #     voice_id="YTpq7expH9539ERJ",  # A pleasant and smooth female voice ready to assist your customers and also eager to have nice converstations
+    # )
+    stt = DeepgramSTTService(api_key=os.getenv("DEEPGRAM_API_KEY"))
+    tts = CartesiaTTSService(
+        api_key=os.getenv("CARTESIA_API_KEY"),
+        voice_id="71a7ad14-091c-4e8e-a314-022ece01c121",  # British Reading Lady
     )
-    llm = OpenAILLMService(api_key=os.getenv("OPENAI_API_KEY"), model="gpt-4o")
-    tts = GradiumTTSService(
-        api_key=os.getenv("GRADIUM_API_KEY"),
-        voice_id="YTpq7expH9539ERJ",  # A pleasant and smooth female voice ready to assist your customers and also eager to have nice converstations
-    )
+    llm = OpenAILLMService(api_key=os.getenv("OPENAI_API_KEY"))
 
     context = OpenAILLMContext(
         [
             {
                 "role": "system",
-                "content": """You are a customer ordering pizza. Be concise and efficient.
+                "content": """You are a customer calling to order a pizza and deciding your order as the conversation progresses.
+                Behavior rules:
+                    •	Start the call with a simple, incomplete order (e.g., “I’d like a large thin-crust pizza.”).
+                    •	Autonomously choose reasonable toppings and options when the agent asks (default to classic, popular choices).
+                    •	Keep every response to one sentence only.
+                    •	Do not ask questions or make small talk.
+                    •	Stay consistent with your previous choices.
+                    •	When the agent confirms the final order and gives the total price, respond exactly with:
+                “Perfect, thanks! Goodbye”
+                    •	Speak English only.
+                    •	Do not use emojis.
 
-YOUR ORDER: One large pizza, pepperoni and mushrooms, thin crust.
-
-RULES:
-- Give your uncompleted order in your first response: "I'd like a large thin crust pizza"
-- Keep responses to 1 sentence
-- When agent confirms order and gives total, say "Perfect, thanks! Goodbye" and nothing else
-- Do NOT ask questions or make small talk
-
-Speak in English only. No emojis.""",
+                Ordering preferences (use internally, do not mention unless asked):
+                    •	Size: large
+                    •	Crust: thin
+                    •	Toppings: 1–2 common toppings (e.g., pepperoni, mushrooms, cheese)
+                    •	No special requests or customizations""",
             },
         ],
     )
@@ -351,6 +423,9 @@ def _create_agent_pipeline(agent_name: str, webrtc_connection: SmallWebRTCConnec
 
     # Conversation flow logger for debugging agent-to-agent interactions
     conversation_logger = ConversationFlowLogger(agent_name)
+
+    # Transcription aggregator to prevent cumulative STT from flooding context
+    transcription_aggregator = TranscriptionAggregator(agent_name)
 
     # Observability components (SimulatorAgent only)
     audio_buffer = None
@@ -394,6 +469,7 @@ def _create_agent_pipeline(agent_name: str, webrtc_connection: SmallWebRTCConnec
             pipeline_steps.append(rtvi)
         pipeline_steps.extend([
             stt,
+            transcription_aggregator,  # Aggregate transcriptions to prevent flooding context
             context_aggregator.user(),
             llm,
             tts,
@@ -407,6 +483,7 @@ def _create_agent_pipeline(agent_name: str, webrtc_connection: SmallWebRTCConnec
             transport.input(),
             conversation_logger,
             stt,
+            transcription_aggregator,  # Aggregate transcriptions to prevent flooding context
         ]
         # Add user transcript processor after STT
         if transcript_processor:
