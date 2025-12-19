@@ -8,10 +8,6 @@ __pycache__/
 *.pyzw
 *.pyzwz
 *.pyzwzw
-<<<<<<< Updated upstream
-
 .env
-=======
 *.wav
 *.db
->>>>>>> Stashed changes
